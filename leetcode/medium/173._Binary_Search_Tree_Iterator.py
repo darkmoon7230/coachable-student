@@ -17,27 +17,27 @@
 class BSTIterator:
 
     def _toLeftMostSubtree(self):
-        while self.current.left is not None:
-            self.current_depth.append(self.current)
-            self.current = self.current.left
+        while self._current.left is not None:
+            self._current_depth.append(self._current)
+            self._current = self._current.left
 
     def __init__(self, root: Optional[TreeNode]):
-        self.current_depth = []
-        self.current = root
+        self._current_depth = []
+        self._current = root
         self._toLeftMostSubtree()
 
     def next(self) -> int:
-        res = self.current.val
-        if self.current.right is not None:
-            self.current = self.current.right
+        res = self._current.val
+        if self._current.right is not None:
+            self._current = self._current.right
             self._toLeftMostSubtree()
         else:
-            if self.current_depth:
-                self.current = self.current_depth.pop()
+            if self._current_depth:
+                self._current = self._current_depth.pop()
             else:
-                self.current = None
+                self._current = None
         return res
 
     def hasNext(self) -> bool:
-        return self.current is not None
+        return self._current is not None
 
