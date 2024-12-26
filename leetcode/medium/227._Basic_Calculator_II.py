@@ -10,7 +10,7 @@
 # Code
 
 
-def token_of(s):
+def tokenize(s) -> List[str]:
     cur = ""
     for c in s:
         if c == " ":
@@ -30,7 +30,7 @@ def token_of(s):
 
 class Solution:
     def calculate(self, s: str) -> int:
-        itr = token_of(s)
+        itr = tokenize(s)
         vals = [next(itr)]
         try:
             while True:
