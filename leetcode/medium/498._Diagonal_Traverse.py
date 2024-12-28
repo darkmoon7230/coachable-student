@@ -10,15 +10,15 @@
 
 class Solution:
     def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
-        def next_up_cord(cord):
+        def next_up_cord(cord) -> List[int]:
             x, y = cord
             return [x + 1, y - 1]
 
-        def next_down_cord(cord):
+        def next_down_cord(cord) -> List[int]:
             x, y = cord
             return [x - 1, y + 1]
 
-        def out_of_bound(cord):
+        def out_of_bound(cord) -> bool:
             x, y = cord
             if x < 0 or y < 0:
                 return True
@@ -28,20 +28,20 @@ class Solution:
                 return True
             return False
 
-        def at(cord):
+        def at(cord) -> int:
             x, y = tuple(cord)
             return mat[y][x]
 
-        up = True
+        goUp = True
         res = []
         cord = [0, 0]
         while cord != (len(mat[0]), len(mat)):
             while not out_of_bound(cord):
                 res.append(at(cord))
-                cord = next_up_cord(cord) if up else next_down_cord(cord)
+                cord = next_up_cord(cord) if goUp else next_down_cord(cord)
 
             # Okay now we need to fix the next cord
-            if up:
+            if goUp:
                 # Usually it is on top of the next element
                 cord[1] += 1
                 # However, when its on the edge, we will need to move it in
@@ -57,7 +57,7 @@ class Solution:
                 if out_of_bound(cord):
                     cord[1] -= 1
                     cord[0] += 1
-            up = not up
+            goUp = not goUp
 
             if out_of_bound(cord):
                 break
