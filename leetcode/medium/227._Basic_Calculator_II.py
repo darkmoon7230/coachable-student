@@ -11,41 +11,38 @@
 
 
 def tokenize(s) -> List[str]:
+    res = []
     cur = ""
-    for c in s:
-        if c == " ":
+    for c in s.replace(" ", ""):
+        if c in set("+-*/"):
             if cur:
-                yield int(cur)
-                cur = ""
-        elif c in "+-*/":
-            if cur:
-                yield int(cur)
+                res.append(int(cur))
             cur = ""
-            yield c
+            res.append(c)
         else:
             assert c.isnumeric()
             cur += c
     if cur:
-        yield int(cur)
+        res.append(int(cur))
+    return res
 
 class Solution:
     def calculate(self, s: str) -> int:
-        itr = tokenize(s)
-        vals = [next(itr)]
-        try:
-            while True:
-                token = next(itr)
-                rhs = next(itr)
-                match token:
-                    case "+":
-                        vals.append(rhs)
-                    case "-":
-                        vals.append(-rhs)
-                    case "*":
-                        vals.append(vals.pop() * rhs)
-                    case "/":
-                        vals.append(int(vals.pop() / rhs))
-        except StopIteration:
-            pass
+        tokens = tokenize(s)
+        vals = [tokens.pop(0)]
+        # leetcode does not support this yet
+        # for token, rhs in batched(tokens, 2):
+        while tokens:
+            operator = tokens.pop(0)
+            rhs = tokens.pop(0)
+            match operator:
+                case "+":
+                    vals.append(rhs)
+                case "-":
+                    vals.append(-rhs)
+                case "*":
+                    vals.append(vals.pop() * rhs)
+                case "/":
+                    vals.append(int(vals.pop() / rhs))
         return sum(vals)
 
