@@ -1,8 +1,3 @@
-# Solution #1 (C++):
-# Description: Using a doubly linked list to update, elements in the linked list are stored as pointers to the underlying map structure which provide O(1) access.
-# Key ideas: Linked list for updating ordering.
-# Map for query
-#
 # Solution #2 (Python):
 # Description: Use a versioning system and a queue to keep track of order of insertion. Upon eviction, evict elements in a map by looking at the head of the queue, using versioning to ensure freshness.
 # Note:
