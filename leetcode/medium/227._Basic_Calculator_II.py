@@ -9,12 +9,20 @@
 # Difficulty: Medium
 # Code
 
+# extracting this out helps with emphasesing/ delgating:
+# 1. typo
+# 2. meaning of "+-*/"
+ADD_OP = "+"
+MINUS_OP = "-"
+MULTIPLY_OP = "*"
+DIVISION_OP = "/"
+VALID_OP = set([ADD_OP, MINUS_OP, MULTIPLY_OP, DIVISION_OP])
 
 def tokenize(s) -> List[str]:
     res = []
     cur = ""
     for c in s.replace(" ", ""):
-        if c in set("+-*/"):
+        if c in VALID_OP:
             if cur:
                 res.append(int(cur))
             cur = ""
@@ -36,13 +44,13 @@ class Solution:
             operator = tokens.pop(0)
             rhs = tokens.pop(0)
             match operator:
-                case "+":
+                case ADD_OP:
                     vals.append(rhs)
-                case "-":
+                case MINUS_OP:
                     vals.append(-rhs)
-                case "*":
+                case MULTIPLY_OP:
                     vals.append(vals.pop() * rhs)
-                case "/":
+                case DIVISION_OP:
                     vals.append(int(vals.pop() / rhs))
         return sum(vals)
 
