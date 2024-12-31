@@ -1,5 +1,5 @@
 '''
-Link to problem: https://leetcode.com/problems/detect-cycles-in-2d-grid/
+Link to problem: https://leetcode.com/problems/friends-of-appropriate-ages/description/
 Loom explaining solution you wrote (5m): 
 Solution:
 Description
